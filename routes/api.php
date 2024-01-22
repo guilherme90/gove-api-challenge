@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UploadScheduleFileController;
+use App\Http\Controllers\ContactListController;
+use App\Http\Controllers\ChangeNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('contacts')->group(function () {
-    Route::post('/upload', [\App\Http\Controllers\UploadScheduleFileController::class, 'store']);
+    Route::post('/upload', UploadScheduleFileController::class);
+    Route::get('/', ContactListController::class);
+    Route::put('/{id}', ChangeNotificationController::class)->whereNumber('id');
 
-    Route::get('/', function () {
-        $useCae = new \App\UseCases\NotifyContactUseCase();
-        $useCae->notify();
-
-        // return response()->json([]);
-    });
+//    Route::get('/', function () {
+//        $useCae = new \App\UseCases\NotifyContactUseCase();
+//        $useCae->notify();
+//    });
 });

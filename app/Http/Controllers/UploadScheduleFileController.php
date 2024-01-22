@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UploadScheduleFileRequest;
 use App\Jobs\CreateContactScheduleJob;
 use App\UseCases\FileProcessUseCase;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UploadScheduleFileController extends Controller
 {
@@ -13,7 +13,7 @@ class UploadScheduleFileController extends Controller
     {
     }
 
-    public function store(Request $request): JsonResponse
+    public function __invoke(UploadScheduleFileRequest $request): JsonResponse
     {
         try {
             $request->file('file')->storeAs('schedules', 'contacts.csv');

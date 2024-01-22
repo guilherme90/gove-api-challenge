@@ -3,11 +3,36 @@
 namespace App\UseCases;
 
 use App\Models\ContactSchedule;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class NotifyContactUseCase
 {
+    public function contactPaginate(string $notified): Paginator
+    {
+        return ContactSchedule::query()
+            ->with('contact')
+            ->where('notified', $notified === 'on')
+            ->simplePaginate(2);
+    }
+
+    public function changeNotification(int $id, string $scheduledAt): void
+    {
+        $contact = ContactSchedule::query()
+            ->where('id', $id)
+            ->first();
+
+        if (!$contact) {
+            throw new HttpException(404, 'Registro não encontrado');
+        }
+
+        $contact->update([
+            'scheduled_at' => $scheduledAt
+        ]);
+    }
+
     public function notify(): void
     {
         ContactSchedule::query()

@@ -51,5 +51,5 @@ Após realizar a leitura do CSV, temos que processar outro worker. Este worker �
 registros e disparar a notificação.
 
 ```shell
-$ php artisan queue:listen --queue=notifications --tries=3 --backoff=5
+$ php artisan schedule:work
 ```

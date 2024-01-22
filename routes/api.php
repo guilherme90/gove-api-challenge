@@ -25,9 +25,4 @@ Route::prefix('contacts')->group(function () {
     Route::post('/upload', UploadScheduleFileController::class);
     Route::get('/', ContactListController::class);
     Route::put('/{id}', ChangeNotificationController::class)->whereNumber('id');
-
-//    Route::get('/', function () {
-//        $useCae = new \App\UseCases\NotifyContactUseCase();
-//        $useCae->notify();
-//    });
 });

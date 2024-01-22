@@ -22,7 +22,7 @@ class UploadScheduleFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['required', 'file', 'mimes:csv', 'size:1024']
+            'file' => ['required', 'file', 'mimetypes:text/plain,text/csv', 'max:1024']
         ];
     }
 
@@ -32,7 +32,7 @@ class UploadScheduleFileRequest extends FormRequest
             'file.required' => 'O envio do arquivo é obrigatório',
             'file.file' => 'Arquivo não reconhecido',
             'mimes' => 'O arquivo deve ser um CSV',
-            'size' => 'O arquivo deve ter o tamanho máximo de 1MB'
+            'max' => 'O arquivo deve ter o tamanho máximo de 1MB'
         ];
     }
 }

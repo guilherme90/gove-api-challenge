@@ -15,7 +15,7 @@ class NotifyContactUseCase
         return ContactSchedule::query()
             ->with('contact')
             ->where('notified', $notified === 'on')
-            ->simplePaginate(2);
+            ->paginate(20);
     }
 
     public function changeNotification(int $id, string $scheduledAt): void

@@ -1,0 +1,17 @@
+services:
+  db:
+    image: "postgres"
+    ports:
+      - "54320:5432"
+    container_name: gove-db
+    restart: always
+    environment:
+      - "POSTGRES_DB=postgres"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=password"
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
